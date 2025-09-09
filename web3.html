@@ -7,6 +7,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Leaflet.js CSS for OSM Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Leaflet.js Script -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -15,7 +22,6 @@
     .font-playfair {
       font-family: 'Playfair Display', serif;
     }
-    /* Dropdown hover styles */
     .dropdown .dropdown-menu {
       display: none;
       transition: all 0.3s ease-in-out;
@@ -23,9 +29,8 @@
     .dropdown:hover .dropdown-menu {
       display: block;
     }
-    /* Style for the hero background */
     .hero-bg {
-      background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470');
+      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470');
       background-size: cover;
       background-position: center;
     }
@@ -36,7 +41,8 @@
   <div class="min-h-screen">
 
     <div class="relative hero-bg h-[60vh] sm:h-[80vh] text-white">
-      <header class="absolute top-0 left-0 right-0 z-10 p-4 sm:p-6 lg:p-8">
+      
+      <header class="absolute top-0 left-0 right-0 p-4 sm:p-6 lg:p-8">
         <div class="container mx-auto max-w-7xl flex justify-between items-center">
           <h1 class="font-playfair text-3xl font-bold">Safarnama</h1>
           
@@ -50,8 +56,8 @@
           <div class="flex items-center space-x-4">
             <i data-lucide="bell" class="hover:text-teal-200 cursor-pointer"></i>
             <div class="dropdown relative">
-              <img src="https://placehold.co/40x40/a7d8de/333333?text=A" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer border-2 border-transparent hover:border-teal-200 transition">
-              <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-10 text-gray-800">
+              <img src="https://placehold.co/40x40/a7d8de/333333?text=S" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer border-2 border-transparent hover:border-teal-200 transition">
+              <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-20 text-gray-800">
                 <a href="#" class="block px-4 py-2 text-sm hover:bg-teal-50">My Profile</a>
                 <a href="#" class="block px-4 py-2 text-sm hover:bg-teal-50">Account Settings</a>
                 <a href="#" class="block px-4 py-2 text-sm hover:bg-teal-50">My Journal</a>
@@ -65,7 +71,7 @@
 
       <div class="absolute inset-0 flex flex-col items-center justify-center">
         <div class="text-center">
-          <h2 class="text-4xl md:text-6xl font-playfair font-bold mb-4">Hello, Adventurer 👋</h2>
+          <h2 class="text-4xl md:text-6xl font-playfair font-bold mb-4">Welcome, Explorer 👋</h2>
           <p class="text-lg text-gray-200 mb-8">Where will your story take you next?</p>
           <div class="relative max-w-lg mx-auto">
             <input type="text" placeholder="Search for destinations, routes, or journals..." class="w-full pl-12 pr-4 py-3 bg-white/90 text-gray-800 border border-gray-200 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400 transition">
@@ -75,44 +81,25 @@
       </div>
     </div>
 
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl -mt-20 relative z-5">
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl -mt-20 relative z-5">
       
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <!-- Stat Cards -->
         <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
-          <div class="bg-teal-100 p-3 rounded-full">
-            <i data-lucide="map" class="text-teal-700"></i>
-          </div>
-          <div>
-            <p class="text-gray-500 text-sm">Trips Taken</p>
-            <p class="font-bold text-lg">4</p>
-          </div>
+          <div class="bg-teal-100 p-3 rounded-full"><i data-lucide="map" class="text-teal-700"></i></div>
+          <div><p class="text-gray-500 text-sm">Trips Taken</p><p class="font-bold text-lg">4</p></div>
         </div>
         <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
-          <div class="bg-orange-100 p-3 rounded-full">
-            <i data-lucide="route" class="text-orange-700"></i>
-          </div>
-          <div>
-            <p class="text-gray-500 text-sm">Distance</p>
-            <p class="font-bold text-lg">1,200 km</p>
-          </div>
+          <div class="bg-orange-100 p-3 rounded-full"><i data-lucide="route" class="text-orange-700"></i></div>
+          <div><p class="text-gray-500 text-sm">Distance</p><p class="font-bold text-lg">1,200 km</p></div>
         </div>
         <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
-          <div class="bg-indigo-100 p-3 rounded-full">
-            <i data-lucide="book-open-text" class="text-indigo-700"></i>
-          </div>
-          <div>
-            <p class="text-gray-500 text-sm">Journals</p>
-            <p class="font-bold text-lg">2</p>
-          </div>
+          <div class="bg-indigo-100 p-3 rounded-full"><i data-lucide="book-open-text" class="text-indigo-700"></i></div>
+          <div><p class="text-gray-500 text-sm">Journals</p><p class="font-bold text-lg">2</p></div>
         </div>
         <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
-          <div class="bg-rose-100 p-3 rounded-full">
-            <i data-lucide="users" class="text-rose-700"></i>
-          </div>
-          <div>
-            <p class="text-gray-500 text-sm">Friends</p>
-            <p class="font-bold text-lg">8</p>
-          </div>
+          <div class="bg-rose-100 p-3 rounded-full"><i data-lucide="users" class="text-rose-700"></i></div>
+          <div><p class="text-gray-500 text-sm">Friends</p><p class="font-bold text-lg">8</p></div>
         </div>
       </div>
 
@@ -120,41 +107,28 @@
         <h3 class="text-xl font-semibold mb-4 sm:mb-0">Your Trips</h3>
         <div class="flex items-center space-x-2">
           <button class="bg-white text-gray-700 px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition flex items-center space-x-2 text-sm font-medium">
-            <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
-            <span>Filter</span>
+            <i data-lucide="sliders-horizontal" class="w-4 h-4"></i><span>Filter</span>
           </button>
           <div class="dropdown relative">
             <button class="bg-teal-600 text-white px-5 py-2 rounded-full hover:bg-teal-700 transition flex items-center space-x-2 text-sm font-medium shadow-lg shadow-teal-500/30">
-              <i data-lucide="plus" class="w-4 h-4"></i>
-              <span>Add Trip</span>
+              <i data-lucide="plus" class="w-4 h-4"></i><span>Add Trip</span>
             </button>
-            <div class="dropdown-menu absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl z-10">
-              <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50">
-                <span class="font-semibold block">Plan New Journey</span>
-                <span class="text-xs text-gray-500">Create a detailed itinerary from scratch.</span>
-              </a>
-              <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50">
-                <span class="font-semibold block">Log a Past Trip</span>
-                <span class="text-xs text-gray-500">Add a completed trip to your journal.</span>
-              </a>
-              <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50">
-                <span class="font-semibold block">Import Itinerary</span>
-                <span class="text-xs text-gray-500">From a file or link.</span>
-              </a>
+            <div class="dropdown-menu absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl z-20">
+              <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50"><span class="font-semibold block">Plan New Journey</span><span class="text-xs text-gray-500">Create a detailed itinerary from scratch.</span></a>
+              <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50"><span class="font-semibold block">Log a Past Trip</span><span class="text-xs text-gray-500">Add a completed trip to your journal.</span></a>
+              <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50"><span class="font-semibold block">Import Itinerary</span><span class="text-xs text-gray-500">From a file or link.</span></a>
             </div>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Trip Cards -->
         <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition duration-300">
           <div class="relative">
             <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Beach in Goa" class="w-full h-56 object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4">
-              <h3 class="text-white font-bold text-2xl font-playfair">Goa</h3>
-              <p class="text-teal-200 text-sm">Beaches & Sunsets</p>
-            </div>
+            <div class="absolute bottom-4 left-4"><h3 class="text-white font-bold text-2xl font-playfair">Goa</h3><p class="text-teal-200 text-sm">Beaches & Sunsets</p></div>
             <div class="absolute top-4 right-4 bg-teal-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Upcoming</div>
           </div>
           <div class="p-5">
@@ -163,21 +137,14 @@
               <span class="flex items-center"><i data-lucide="users" class="w-4 h-4 mr-2 text-orange-600"></i>Group Trip</span>
             </div>
             <p class="text-gray-500 text-sm mb-4">A much-awaited trip to the sunny beaches of Goa. Planning to explore the north and south coasts.</p>
-            <div class="flex items-center justify-end space-x-2">
-              <button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="share-2" class="w-5 h-5"></i></button>
-              <button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="pencil" class="w-5 h-5"></i></button>
-            </div>
+            <div class="flex items-center justify-end space-x-2"><button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="share-2" class="w-5 h-5"></i></button><button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="pencil" class="w-5 h-5"></i></button></div>
           </div>
         </div>
-
         <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition duration-300">
           <div class="relative">
-            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Mountains in Manali" class="w-full h-56 object-cover">
+            <img src="https://images.unsplash.com/photo-1528459176916-4131a1b708b7" alt="Mountains in Manali" class="w-full h-56 object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4">
-              <h3 class="text-white font-bold text-2xl font-playfair">Manali</h3>
-              <p class="text-teal-200 text-sm">Mountains & Adventure</p>
-            </div>
+            <div class="absolute bottom-4 left-4"><h3 class="text-white font-bold text-2xl font-playfair">Manali</h3><p class="text-teal-200 text-sm">Mountains & Adventure</p></div>
             <div class="absolute top-4 right-4 bg-gray-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Completed</div>
           </div>
           <div class="p-5">
@@ -186,22 +153,24 @@
               <span class="flex items-center"><i data-lucide="user" class="w-4 h-4 mr-2 text-orange-600"></i>Solo Trip</span>
             </div>
             <p class="text-gray-500 text-sm mb-4">An unforgettable solo adventure through the Himalayas. The views were absolutely breathtaking.</p>
-            <div class="flex items-center justify-end space-x-2">
-              <button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="share-2" class="w-5 h-5"></i></button>
-              <button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="book-open-text" class="w-5 h-5"></i></button>
-            </div>
+            <div class="flex items-center justify-end space-x-2"><button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="share-2" class="w-5 h-5"></i></button><button class="text-gray-500 hover:text-teal-700 p-2 rounded-full transition"><i data-lucide="book-open-text" class="w-5 h-5"></i></button></div>
           </div>
         </div>
       </div>
-    </div>
+
+      <!-- === OSM Map Section === -->
+      <div class="mt-12">
+          <h3 class="text-xl font-semibold mb-4">Explore Your World</h3>
+          <div id="map" class="w-full h-96 rounded-2xl shadow-lg z-0 border"></div>
+      </div>
+    </main>
 
     <footer class="text-center py-6 border-t mt-12 bg-white">
       <p class="text-gray-500 text-sm">&copy; 2025 Safarnama. Happy travels!</p>
     </footer>
   </div>
 
-  <button id="chatbot-btn"
-    class="fixed bottom-6 right-6 bg-teal-600 hover:bg-teal-700 text-white p-4 rounded-full shadow-lg shadow-teal-500/40 transition flex items-center justify-center">
+  <button id="chatbot-btn" class="fixed bottom-6 right-6 bg-teal-600 hover:bg-teal-700 text-white p-4 rounded-full shadow-lg shadow-teal-500/40 transition flex items-center justify-center">
     <i data-lucide="message-circle" class="w-6 h-6"></i>
   </button>
 
@@ -212,6 +181,23 @@
     document.getElementById("chatbot-btn").addEventListener("click", () => {
       alert("Chatbot coming soon 🤖✨");
     });
+
+    // === Leaflet Map Initialization ===
+    const map = L.map('map').setView([22.9734, 78.6569], 5); // Centered on India
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([28.6139, 77.2090]).addTo(map)
+      .bindPopup('<b>New Delhi</b><br>The heart of India.')
+      .openPopup();
+      
+    L.marker([19.0760, 72.8777]).addTo(map)
+      .bindPopup('<b>Mumbai</b><br>The city of dreams.');
+
   </script>
 </body>
 </html>
+
+
